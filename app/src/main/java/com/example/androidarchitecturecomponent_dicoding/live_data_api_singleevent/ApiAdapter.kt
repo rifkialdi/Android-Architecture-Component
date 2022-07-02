@@ -1,4 +1,4 @@
-package com.example.androidarchitecturecomponent_dicoding.live_data_api
+package com.example.androidarchitecturecomponent_dicoding.live_data_api_singleevent
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

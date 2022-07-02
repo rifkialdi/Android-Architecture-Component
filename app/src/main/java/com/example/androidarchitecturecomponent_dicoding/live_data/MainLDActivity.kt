@@ -18,20 +18,30 @@ class MainLDActivity : AppCompatActivity() {
         binding = ActivityMainLdactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /* Inisialisasi viewModel */
+//         Inisialisasi viewModel
         mLiveDataTimerViewModel = ViewModelProvider(this)[MainLDViewModel::class.java]
 
         subscribe()
     }
 
     private fun subscribe() {
-        /* membuat objek Objek observer untuk di lampiirkan ke objek LiveData */
+//         membuat objek Objek observer untuk di lampiirkan ke objek LiveData
         val elapsedTimeObserver = Observer<Long?> { aLong ->
             val newText = this@MainLDActivity.resources.getString(R.string.seconds, aLong)
             binding.idtvPercentege.text = newText
         }
 
-        /* objek observer di lampirkan ke objek LiveData menggunakan metode observe() */
+//         objek observer di lampirkan ke objek LiveData menggunakan metode observe()
         mLiveDataTimerViewModel.getElapsedTime().observe(this, elapsedTimeObserver)
+
+//        Atau bisa langsung menulis code seperti ini =>
+//
+//        mLiveDataTimerViewModel.getElapsedTime().observe(this) { value ->
+//            val newText = this@MainLDActivity.resources.getString(R.string.seconds, aLong)
+//            binding.idtvPercentege.text = newText
+//        }
+
+
+
     }
 }

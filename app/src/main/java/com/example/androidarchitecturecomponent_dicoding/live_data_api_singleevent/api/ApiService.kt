@@ -1,4 +1,4 @@
-package com.example.androidarchitecturecomponent_dicoding.live_data_api.api
+package com.example.androidarchitecturecomponent_dicoding.live_data_api_singleevent.api
 
 import retrofit2.Call
 import retrofit2.http.Field

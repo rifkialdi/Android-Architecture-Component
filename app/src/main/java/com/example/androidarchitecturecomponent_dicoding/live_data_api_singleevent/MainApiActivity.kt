@@ -1,15 +1,14 @@
-package com.example.androidarchitecturecomponent_dicoding.live_data_api
+package com.example.androidarchitecturecomponent_dicoding.live_data_api_singleevent
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidarchitecturecomponent_dicoding.databinding.ActivityMainApiBinding
-import com.example.androidarchitecturecomponent_dicoding.live_data_api.api.Response
+import com.example.androidarchitecturecomponent_dicoding.live_data_api_singleevent.api.Response
+import com.google.android.material.snackbar.Snackbar
 
 class MainApiActivity : AppCompatActivity() {
 
@@ -23,19 +22,28 @@ class MainApiActivity : AppCompatActivity() {
 
         binding.idrv.layoutManager = LinearLayoutManager(this)
 
-        /* Inisialisasi ViewModel */
+//      Inisialisasi ViewModel
         mainApiViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainApiViewModel::class.java)
-        /* lakukan observe data dari ViewModel */
+
+//      lakukan observe data pada variabel notes dari ViewModel
         mainApiViewModel.notes.observe(this) { response ->
             findNotes(response)
         }
+
+//      observe pada variabel snackbarText, ini menggunak metode singleEvent
+        mainApiViewModel.snackbarText.observe(this) {
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Snackbar.make(window.decorView.rootView, snackBarText, Snackbar.LENGTH_SHORT).show()
+            }
+        }
+
 
         binding.idbtnTambahdata.setOnClickListener {
             val note = binding.inputan.text.toString()
             if (note.isNotEmpty()) {
                 mainApiViewModel.postNote(note)
 
-                /* Agar keyboar otomatis hilang */
+//              Agar keyboard otomatis hilang
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(it.windowToken, 0)
             }

@@ -1,4 +1,4 @@
-package com.example.androidarchitecturecomponent_dicoding.live_data_api.api
+package com.example.androidarchitecturecomponent_dicoding.live_data_api_singleevent.api
 
 import com.google.gson.annotations.SerializedName
 

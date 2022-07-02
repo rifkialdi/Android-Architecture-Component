@@ -17,10 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
         <activity
-            android:name=".live_data_api.AddDataActivity"
-            android:exported="false" />
-        <activity
-            android:name=".live_data_api.MainApiActivity"
+            android:name=".live_data_api_singleevent.MainApiActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
