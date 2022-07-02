@@ -1,16 +1,15 @@
 package com.example.androidarchitecturecomponent_dicoding.live_data_api
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.ViewModel
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidarchitecturecomponent_dicoding.databinding.ActivityMainApiBinding
-import com.example.androidarchitecturecomponent_dicoding.live_data_api.api.ApiConfig
 import com.example.androidarchitecturecomponent_dicoding.live_data_api.api.Response
-import retrofit2.*
 
 class MainApiActivity : AppCompatActivity() {
 
@@ -30,12 +29,24 @@ class MainApiActivity : AppCompatActivity() {
         mainApiViewModel.notes.observe(this) { response ->
             findNotes(response)
         }
+
+        binding.idbtnTambahdata.setOnClickListener {
+            val note = binding.inputan.text.toString()
+            if (note.isNotEmpty()) {
+                mainApiViewModel.postNote(note)
+
+                /* Agar keyboar otomatis hilang */
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(it.windowToken, 0)
+            }
+
+        }
     }
 
+    /* Mengambil data json response dan di proses untuk class adapter */
     fun findNotes(response: Response) {
         val notes = response.notes
         val data = arrayListOf<String>()
-        Log.e("data response json", "data : $notes", )
 
         for (item in notes) {
             data.add(item.note)

@@ -15,11 +15,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /* Menyambung kelas ViewModel dengan MainActivity */
+        /* Menginisialisasi / Menyambung kelas ViewModel dengan MainActivity */
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         resultTotal()
 
-        binding.idbtnSubmit.setOnClickListener {
+        binding.idbtnTambahdata.setOnClickListener {
             val panjang = binding.idedtPanjang.text.toString()
             val lebar = binding.idedtLebar.text.toString()
 
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun resultTotal() {
-        /* mendapatkan nilai dari properties ViewModel */
+        /* TextView mendapatkan nilai dari properties ViewModel */
         binding.idtvResult.text = viewModel.result.toString()
     }
 }
